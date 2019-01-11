@@ -18,6 +18,13 @@ var Message = mongoose.model('Message',{
   message : String
 })
 
+var User = mongoose.model('User',{
+  displayname:String,
+  email : String
+
+})
+
+
 var Exchanges=mongoose.model('Exchanges',{
   name:String,
   ethadd:String,
@@ -112,6 +119,19 @@ res.send(docs);
 
 
 });
+
+app.post('/adduser',(req,res)=>{
+  console.log('adduser called');
+  console.log(req.body);
+  var user=new User(req.body);
+  user.save((err)=>{
+    if(err){
+      console.log(err);
+    }else{
+      res.write('ok')
+    }
+  })
+})
 
 
 
